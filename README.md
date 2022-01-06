@@ -14,6 +14,11 @@ $ python3 simplewebserver 8080
 ```
   ![image](https://user-images.githubusercontent.com/55146805/148377428-3c226593-f182-49f4-83ba-bb57602bc7f5.png)
   
-  ![image](https://user-images.githubusercontent.com/55146805/148377897-e296232c-05db-4a57-9adc-8c1aa15552f7.png)
-
+  When you navigate to https://127.0.0.1:8080 you will see the following. You can edit the index.html file as much as you want or remove it to allow listing of files on the server.
+  
+  ## index.html available abd served
+![image](https://user-images.githubusercontent.com/55146805/148378002-ae78a05f-bcf9-4cf6-ad22-ecb50da0b2e4.png)
+  
+  ## renamed index.html to index-old.html listing showed
+![image](https://user-images.githubusercontent.com/55146805/148378694-0b3656b0-4061-4cb6-82b1-8b818d46c76a.png)
 
