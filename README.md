@@ -13,4 +13,7 @@ $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.
 $ python3 simplewebserver 8080
 ```
   ![image](https://user-images.githubusercontent.com/55146805/148377428-3c226593-f182-49f4-83ba-bb57602bc7f5.png)
+  
+  ![image](https://user-images.githubusercontent.com/55146805/148377897-e296232c-05db-4a57-9adc-8c1aa15552f7.png)
+
 
