@@ -11,4 +11,5 @@ $ git clone https://github.com/W1nterFr3ak/simplewebserver
 $ cd simplewebserver
 $ python3 simplewebserver 8080
 ```
-  ![image](https://user-images.githubusercontent.com/55146805/148359419-5505f90b-ace9-4563-a7e2-8136fa8cea4b.png)
+  ![image](https://user-images.githubusercontent.com/55146805/148377428-3c226593-f182-49f4-83ba-bb57602bc7f5.png)
+
