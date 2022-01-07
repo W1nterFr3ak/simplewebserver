@@ -166,7 +166,11 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     banner = r"""
+=======
+    banner = """
+>>>>>>> 1b6e3c8a0584d3b062b7c444aae32b517fb1990c
 / ___| (_) _ __ ___   _ __  | |  ___ / ___|   ___  _ __ __   __  ___  _ __ 
 \___ \ | || '_ ` _ \ | '_ \ | | / _ \\___ \  / _ \| '__|\ \ / / / _ \| '__|
  ___) || || | | | | || |_) || ||  __/ ___) ||  __/| |    \ V / |  __/| |   
@@ -184,8 +188,12 @@ if __name__ == '__main__':
     serverAddress = ('', 8080)
     server = HTTPServer(serverAddress, RequestHandler)
     # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
+<<<<<<< HEAD
     server.socket =ssl.wrap_socket(server.socket, keyfile="key.pem",\
                                   certfile="cert.pem", server_side=True)
+=======
+    server.socket =ssl.wrap_socket(server.socket, keyfile="key.pem", certfile="cert.pem", server_side=True)
+>>>>>>> 1b6e3c8a0584d3b062b7c444aae32b517fb1990c
     ps = ''.join([str(l) + ":" for l in server.server_address])
     print(f'[+] server started at  {ps[:-1]}')
     server.serve_forever()
