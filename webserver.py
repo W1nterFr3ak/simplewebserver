@@ -18,13 +18,13 @@ class base_case(object):
             handler.handle_error(msg)
 
     def index_path(self, handler):
-        return os.full_path.join(handler.full_path, 'index.html')
+        return os.path.join(handler.full_path, 'index.html')
 
-    def test(self, handler):
-        assert False, 'Not implemented.' # empty to be overriden
+    # def test(self, handler):
+    #     assert False, 'Not implemented.' # empty to be overriden
 
-    def act(self, handler):
-        assert False, 'Not implemented.' # empty to be overriden
+    # def act(self, handler):
+    #     assert False, 'Not implemented.' # empty to be overriden
 
 class ServerException(Exception):
     pass
@@ -33,7 +33,7 @@ class case_no_file(object):
     '''File or directory does not exist.'''
 
     def test(self, handler):
-        return not os.full_path.exists(handler.full_path)
+        return not os.path.exists(handler.full_path)
 
     def act(self, handler):
         raise ServerException(f"'{handler.full_path}' not found")
@@ -44,7 +44,7 @@ class case_existing_file(base_case):
     '''File exists.'''
 
     def test(self, handler):
-        return os.full_path.isfile(handler.full_path)
+        return os.path.isfile(handler.full_path)
 
     def act(self, handler):
         self.handle_file(handler, handler.full_path)
@@ -53,11 +53,11 @@ class case_directory_index_file(object):
     '''Serve index.html page for a directory.'''
 
     def index_path(self, handler):
-        return os.full_path.join(handler.full_path, 'index.html')
+        return os.path.join(handler.full_path, 'index.html')
 
     def test(self, handler):
-        return os.full_path.isdir(handler.full_path) and \
-               os.full_path.isfile(self.index_path(handler))
+        return os.path.isdir(handler.full_path) and \
+               os.path.isfile(self.index_path(handler))
 
     def act(self, handler):
         handler.handle_file(self.index_path(handler))
@@ -67,8 +67,8 @@ class case_directory_no_index_file(case_directory_index_file):
     '''Serve listing for a directory without an index.html page.'''
 
     def test(self, handler):
-        return os.full_path.isdir(handler.full_path) and \
-               not os.full_path.isfile(self.index_path(handler))
+        return os.path.isdir(handler.full_path) and \
+               not os.path.isfile(self.index_path(handler))
 
     def act(self, handler):
         handler.list_files_in_dir(handler.full_path)
@@ -121,7 +121,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         try:
 
-            self.full_path = os.getcwd() + self.full_path
+            self.full_path = os.getcwd() + self.path
 
             for case in self.Cases:
                 if case.test(self):
@@ -132,7 +132,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.handle_error(msg)
 
     def handle_error(self, msg):
-        content = self.Error_Page.format(full_path=self.full_path, msg=msg)
+        content = self.Error_Page.format(full_path=self.path, msg=msg)
         self.send_content(content.encode(), 404)
 
     def send_content(self, content, status=200):
