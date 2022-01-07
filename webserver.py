@@ -36,7 +36,7 @@ class case_no_file:
         return not os.path.exists(handler.full_path)
 
     def act(self, handler):
-        raise ServerException(f"'{handler.full_path}' not found")
+        raise ServerException(f"'{handler.path}' not found")
 
 
 
@@ -132,6 +132,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.handle_error(msg)
 
     def handle_error(self, msg):
+        print(self.path)
         content = self.Error_Page.format(full_path=self.path, msg=msg)
         self.send_content(content.encode(), 404)
 
@@ -184,9 +185,14 @@ if __name__ == '__main__':
     serverAddress = ('', 8080)
     server = HTTPServer(serverAddress, RequestHandler)
     # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
-    server.socket =ssl.wrap_socket(server.socket, keyfile="key.pem",\
-                                  certfile="cert.pem", server_side=True)
-    server.socket =ssl.wrap_socket(server.socket, keyfile="key.pem", certfile="cert.pem", server_side=True)
+    try:
+        server.socket =ssl.wrap_socket(server.socket, keyfile="key.pem",\
+                                      certfile="cert.pem", server_side=True)
+    except FileNotFoundError:
+        print("Sssl Cert and Key file not found")
+        print("Please run the following command :\n \
+            openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem")
+        sys.exit()
     ps = ''.join([str(l) + ":" for l in server.server_address])
     print(f'[+] server started at  {ps[:-1]}')
     server.serve_forever()
