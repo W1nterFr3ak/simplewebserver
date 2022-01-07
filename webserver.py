@@ -5,7 +5,7 @@ import sys
 # import art
 
 
-class base_case(object):
+class base_case:
     '''Parent for case handlers.'''
 
     def handle_file(self, handler, full_path):
@@ -29,7 +29,7 @@ class base_case(object):
 class ServerException(Exception):
     pass
 
-class case_no_file(object):
+class case_no_file:
     '''File or directory does not exist.'''
 
     def test(self, handler):
@@ -49,7 +49,7 @@ class case_existing_file(base_case):
     def act(self, handler):
         self.handle_file(handler, handler.full_path)
 
-class case_directory_index_file(object):
+class case_directory_index_file:
     '''Serve index.html page for a directory.'''
 
     def index_path(self, handler):
@@ -75,7 +75,7 @@ class case_directory_no_index_file(case_directory_index_file):
 
 
 
-class case_always_fail(object):
+class case_always_fail:
     '''Base case if nothing else worked.'''
 
     def test(self, handler):
